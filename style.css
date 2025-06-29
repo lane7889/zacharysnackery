@@ -16,55 +16,73 @@ body {
   align-items: center;
   animation: fadeIn 1.5s ease-in-out;
   position: relative;
+  padding: 20px;
 }
 
 .fullscreen-logo {
-  width: 70vw;
-  max-width: 600px;
+  width: 60vw;
+  max-width: 720px;
+  min-width: 260px;
   height: auto;
   opacity: 0;
   animation: zoomIn 2s ease-out forwards;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .scroll-down {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #b0855e;
   animation: bounce 2s infinite;
 }
 
 .content {
-  max-width: 900px;
+  max-width: 960px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 60px 30px;
 }
 
 .intro, .products, .order {
-  margin: 60px 0;
+  margin: 80px 0;
 }
 
 .products h2, .order h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   border-bottom: 2px solid #decbb7;
-  padding-bottom: 0.4rem;
-  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .card {
   background: #fff8ef;
   border: 1px solid #e8dccf;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.order-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #b05c00;
+  color: #fff8ef;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #8c4500;
 }
 
 footer {
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #725c45;
-  margin-top: 60px;
-  padding-bottom: 40px;
+  margin-top: 80px;
+  padding-bottom: 50px;
 }
 
 a {
@@ -77,13 +95,13 @@ a:hover {
 }
 
 @keyframes zoomIn {
-  0% { transform: scale(0.8); opacity: 0; }
+  0% { transform: scale(0.85); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes fadeIn {
