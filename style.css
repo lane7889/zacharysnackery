@@ -8,26 +8,29 @@ body {
 }
 
 .wrapper {
-  max-width: 800px;
+  max-width: 900px;
   margin: auto;
   padding: 20px;
 }
 
 .hero {
   text-align: center;
-  padding-top: 40px;
+  padding: 80px 20px 40px;
+  position: relative;
 }
 
 .logo {
-  width: 140px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 220px;
+  max-width: 80vw;
+  border-radius: 50%;
+  animation: zoomIn 1.4s ease-out forwards;
   margin-bottom: 20px;
+  opacity: 0;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.8rem;
+  margin-bottom: 0.4rem;
 }
 
 .tagline {
@@ -37,8 +40,11 @@ h1 {
 }
 
 .intro, .products, .order {
-  margin: 40px 0;
-  animation: fadeIn 0.8s ease-in-out;
+  margin: 60px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeIn 0.8s ease-in-out forwards;
+  animation-delay: 0.6s;
 }
 
 .products h2, .order h2 {
@@ -79,7 +85,14 @@ a:hover {
   text-decoration: underline;
 }
 
+@keyframes zoomIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
