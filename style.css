@@ -1,0 +1,85 @@
+
+body {
+  font-family: 'Georgia', serif;
+  background: #fefcf8;
+  color: #2d1b0e;
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.hero {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.logo {
+  width: 140px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tagline {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #5c3d22;
+}
+
+.intro, .products, .order {
+  margin: 40px 0;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.products h2, .order h2 {
+  font-size: 1.8rem;
+  border-bottom: 2px solid #decbb7;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.card {
+  background: #fff8ef;
+  border: 1px solid #e8dccf;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #725c45;
+  margin-top: 60px;
+  padding-bottom: 40px;
+}
+
+a {
+  color: #b05c00;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
