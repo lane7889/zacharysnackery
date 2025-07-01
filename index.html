@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zachary's Snackery</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <img src="zsnackery-logo.png" alt="Zachary's Snackery Logo" class="logo"/>
+  </header>
+  <main>
+    <h1>Place an Order</h1>
+    <form name="cookie-order" method="POST" data-netlify="true" action="thank-you.html">
+      <label>Name (required):<br><input type="text" name="name" required></label><br><br>
+      <label>Email (required):<br><input type="email" name="email" required></label><br><br>
+      <label>Phone (optional):<br><input type="tel" name="phone"></label><br><br>
+      <label>Cookie Type:<br>
+        <select name="cookie_type" required>
+          <option value="Snickerdoodle">Snickerdoodle</option>
+          <option value="Gingersnap">Gingersnap</option>
+          <option value="Cracked Chocolate">Cracked Chocolate</option>
+          <option value="Mixed (4 of each)">Mixed (4 of each)</option>
+        </select>
+      </label><br><br>
+      <label>Quantity (dozens):<br>
+        <select name="quantity" required>
+          <option value="1">1 dozen</option>
+          <option value="2">2 dozen</option>
+          <option value="3">3 dozen</option>
+          <option value="4">4 dozen</option>
+          <option value="5">5 dozen</option>
+          <option value="6">6 dozen</option>
+          <option value="7">7 dozen</option>
+          <option value="8">8 dozen</option>
+        </select>
+      </label><br><br>
+      <label>Preferred Delivery Time:<br>
+        <input type="datetime-local" name="delivery_time" required>
+      </label><br><br>
+      <button type="submit">Submit Order</button>
+    </form>
+  </main>
+  <footer>
+    <p class="disclaimer">This business operates under Florida Cottage Food Law and is not subject to Florida’s food safety regulations or inspection by the FDA.</p>
+  </footer>
+</body>
+</html>
