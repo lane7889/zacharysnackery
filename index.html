@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zachary's Snackery</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <img src="zsnackery-logo.png" alt="Zachary's Snackery Logo" class="logo"/>
+    <h1>Welcome to Zachary's Snackery</h1>
+  </header>
+
+  <main>
+    <section id="order">
+      <h2>📦 Place an Order</h2>
+      <form action="https://formsubmit.co/your@email.com" method="POST">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" value="https://zacharysnackery.com/thank-you.html">
+
+        <label for="name">Name (required):</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email (required):</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Phone (optional):</label>
+        <input type="tel" id="phone" name="phone" />
+
+        <label for="cookie">Cookie Type:</label>
+        <select id="cookie" name="cookie">
+          <option value="Snickerdoodle">Snickerdoodle</option>
+          <option value="Cracked Chocolate">Cracked Chocolate</option>
+          <option value="Ginger Snap">Ginger Snap</option>
+          <option value="Mixed">Mixed (4 of each)</option>
+        </select>
+
+        <label for="quantity">Quantity (dozens):</label>
+        <select id="quantity" name="quantity">
+          <option value="1">1 dozen</option>
+          <option value="2">2 dozen</option>
+          <option value="3">3 dozen</option>
+          <option value="4">4 dozen</option>
+          <option value="5">5 dozen</option>
+          <option value="6">6 dozen</option>
+          <option value="7">7 dozen</option>
+          <option value="8">8 dozen</option>
+        </select>
+
+        <label for="time">Preferred Delivery Time:</label>
+        <input type="datetime-local" id="time" name="delivery_time" />
+
+        <button type="submit">Submit Order</button>
+      </form>
+      <p class="disclaimer">This business operates under Florida Cottage Food Laws and is not subject to Florida's food safety regulations.</p>
+    </section>
+  </main>
+</body>
+</html>
