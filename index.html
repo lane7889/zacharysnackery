@@ -153,5 +153,28 @@
 </style>
 
 </main>
+
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script type="text/javascript">
+(function() {
+    emailjs.init("_03371VltUE4Gz3A5");
+})();
+window.onload = function() {
+    const form = document.getElementById("order-form");
+    if (form) {
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            emailjs.sendForm("service_8gundbt", "template_ofzhg1q", this)
+                .then(function() {
+                    window.location.href = "thank-you.html";
+                }, function(error) {
+                    alert("Email failed to send. Please try again.");
+                    console.log("FAILED", error);
+                });
+        });
+    }
+};
+</script>
 </body>
+
 </html>
