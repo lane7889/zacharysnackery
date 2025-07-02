@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zachary's Snackery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="hero-fullscreen">
+    <img src="zsnackery-logo.png" alt="Zachary's Snackery Logo" class="fullscreen-logo" />
+    <div class="scroll-down">▼</div>
+  </section>
+
+  <main class="content">
+    <section class="intro">
+      <p>
+        I grew up allergic to the baked goods everyone else could eat — dairy, nuts, and sesame were always off the table.
+        That’s why I started Zachary’s Snackery: a brand that brings bold, nostalgic flavors to everyone in an allergy-friendly way.
+        Every baked good is made without dairy, nuts, or sesame — so no one has to miss out on the good stuff.
+      </p>
+    </section>
+
+    <section class="products">
+      <h2>Baked Goods</h2>
+      <div class="card">
+        <h3>Gingersnaps</h3>
+        <p>Classic spice with a crisp snap and warm molasses finish — perfect with a cup of tea or just on their own.</p>
+      </div>
+      <div class="card">
+        <h3>Chocolate Crinkle Cookies</h3>
+        <p>Rich, fudgy chocolate cookies rolled in powdered sugar — cracked on the outside, soft on the inside.</p>
+      </div>
+      <div class="card">
+        <h3>Snickerdoodles</h3>
+        <p>Soft, cinnamon-sweet, and kissed with gentle salt — a timeless favorite with an allergy-friendly twist. Also really good with coffee.</p>
+      </div>
+    </section>
+
+    <h2>How to Order</h2>
+    <p>Personal orders with local delivery now available. Farmers Market booth coming soon!</p>
+
+    <section class="order-expanded">
+      <h2>
+        <button class="dropdown-toggle" onclick="document.querySelector('.order-form').classList.toggle('show')">
+          📦 Place an Order
+        </button>
+      </h2>
+      <form class="order-form" action="https://formsubmit.co/zacharyssnackery@gmail.com" method="POST" onsubmit="redirectAfterSubmit()">
+        <input type="hidden" name="_next" value="thank-you.html">
+        <input type="hidden" name="_captcha" value="false">
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone">
+
+        <label for="cookieType">Choose your cookies:</label>
+        <select id="cookieType" name="cookieType">
+          <option value="gingersnaps">Gingersnaps</option>
+          <option value="chocolate-crinkle">Chocolate Crinkle Cookies</option>
+          <option value="snickerdoodles">Snickerdoodles</option>
+          <option value="mix">Mixed Dozen</option>
+        </select>
+
+        <label for="quantity">How many cookies? (Max 100/day)</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="100" value="12" />
+
+        <label for="deliveryDistance">Delivery distance:</label>
+        <select id="deliveryDistance" name="deliveryDistance">
+          <option value="under5">Under 5 miles - $2</option>
+          <option value="5to10">5–10 miles - $3</option>
+          <option value="10to15">10–15 miles - $4</option>
+        </select>
+
+        <label for="deliveryTime">Preferred delivery time:</label>
+        <input type="datetime-local" id="deliveryTime" name="deliveryTime" />
+
+        <p class="info">
+          🍪 $8 for the first dozen, $6 for each additional dozen.<br />
+          🚚 Max 100 cookies/day per customer.<br />
+          🕒 Delivery within 24 hours (or your chosen time).<br />
+          📧 You will receive a confirmation email shortly.
+        </p>
+
+        <button type="submit" class="order-btn">Submit Order Request</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>📸 Follow us on Instagram: <a href="https://instagram.com/zacharyssnackery" target="_blank">@zacharyssnackery</a></p>
+      <p class="copyright">© 2025 Zachary’s Snackery</p>
+    </footer>
+  </main>
+
+  <script>
+    function redirectAfterSubmit() {
+      setTimeout(() => {
+        window.location.href = "thank-you.html";
+      }, 500);
+    }
+  </script>
+
+  <style>
+    .dropdown-toggle {
+      font-size: 1.25rem;
+      background-color: #fff8ef;
+      color: #b05c00;
+      padding: 10px 20px;
+      border: 2px solid #b05c00;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .order-form {
+      display: none;
+      margin-top: 20px;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .order-form.show {
+      display: flex;
+    }
+  </style>
+</body>
+</html>
