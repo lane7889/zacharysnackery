@@ -1,0 +1,50 @@
+
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #fff8f0;
+  padding: 20px;
+}
+.logo {
+  max-width: 200px;
+  margin: 20px auto;
+}
+.intro {
+  max-width: 600px;
+  margin: auto;
+  font-size: 1.1em;
+}
+.dropdown {
+  margin-top: 30px;
+}
+.dropbtn {
+  background-color: #ff914d;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.dropdown-content {
+  display: none;
+  margin-top: 20px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+  margin: auto;
+}
+input, select, button {
+  padding: 10px;
+  font-size: 16px;
+}
+button[type="submit"] {
+  background-color: #ffa94d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
