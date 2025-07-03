@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zachary's Snackery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <img src="zsnackery-logo.png" alt="Zachary's Snackery Logo" class="logo" />
+
+  <p class="intro">
+    I grew up allergic to the baked goods everyone else could eat — dairy, nuts, and sesame were always off the table. That’s why I started Zachary’s Snackery: a brand that brings bold, nostalgic flavors to everyone in an allergy-friendly way. Every baked good is made without dairy, nuts, or sesame — so no one has to miss out on the good stuff.
+  </p>
+
+  <div class="dropdown">
+    <button onclick="toggleDropdown()" class="dropbtn">▼ Place an Order</button>
+    <div id="orderDropdown" class="dropdown-content">
+      <form action="https://snackery-backend-production.up.railway.app/api/order" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="tel" name="phone" placeholder="Phone Number" required />
+        <select name="cookieType" required>
+          <option value="">Select Cookie Type</option>
+          <option value="Gingersnaps">Gingersnaps</option>
+          <option value="Chocolate Crinkle Cookies">Chocolate Crinkle Cookies</option>
+          <option value="Snickerdoodles">Snickerdoodles</option>
+          <option value="Mixed Dozen">Mixed Dozen</option>
+        </select>
+        <input type="number" name="quantity" placeholder="Dozens (1–5)" min="1" max="5" required />
+        <input type="text" name="deliveryDistance" placeholder="How far are you from me? (in miles)" required />
+        <input type="text" name="deliveryTime" placeholder="Preferred Delivery Time" required />
+        <button type="submit">Submit Order</button>
+      </form>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    📸 Follow us on Instagram: @zacharyssnackery<br><br>
+    © 2025 Zachary’s Snackery
+  </p>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("orderDropdown");
+      menu.style.display = (menu.style.display === "block") ? "none" : "block";
+    }
+  </script>
+</body>
+</html>
