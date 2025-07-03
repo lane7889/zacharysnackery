@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zachary's Snackery</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <img src="zsnackery-logo.png" alt="Zachary's Snackery Logo" class="logo" />
+  </header>
+
+  <main>
+    <section class="intro">
+      <p>I grew up allergic to the baked goods everyone else could eat — dairy, nuts, and sesame were always off the table. That’s why I started Zachary’s Snackery: a brand that brings bold, nostalgic flavors to everyone in an allergy-friendly way. Every baked good is made without dairy, nuts, or sesame — so no one has to miss out on the good stuff.</p>
+    </section>
+
+    <section class="menu">
+      <h2>Baked Goods</h2>
+      <ul>
+        <li><strong>Gingersnaps:</strong> Classic spice with a crisp snap and warm molasses finish.</li>
+        <li><strong>Chocolate Crinkle Cookies:</strong> Rich, fudgy, rolled in powdered sugar — cracked outside, soft inside.</li>
+        <li><strong>Snickerdoodles:</strong> Soft, cinnamon-sweet, and kissed with salt — perfect with coffee.</li>
+      </ul>
+    </section>
+
+    <section class="order">
+      <h2>Place an Order</h2>
+      
+<form action="https://formsubmit.co/zacharysnackery@gmail.com" method="POST">
+  <input type="text" name="name" placeholder="Full Name" required>
+  <input type="email" name="email" placeholder="Email Address" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+
+  <select name="cookieType" required>
+    <option value="">Select Cookie Type</option>
+    <option value="Chocolate Crinkle">Chocolate Crinkle</option>
+    <option value="Gingersnap">Gingersnap</option>
+    <option value="Snickerdoodle">Snickerdoodle</option>
+    <option value="Mixed (4 of each)">Mixed (4 of each)</option>
+  </select>
+
+  <input type="text" name="quantity" placeholder="How many dozen?" required>
+  <input type="text" name="deliveryDistance" placeholder="Delivery Distance (e.g. 5 miles)">
+  <input type="text" name="deliveryTime" placeholder="Preferred Delivery Time">
+
+  <input type="hidden" name="_next" value="https://zacharysnackery.com/thank-you.html">
+  <input type="hidden" name="_cc" value="3219001472@tmomail.net">
+
+  <button type="submit">Submit Order</button>
+</form>
+
+    </section>
+
+    <footer>
+      <p>📸 Follow us on Instagram: @zacharyssnackery</p>
+      <p>© 2025 Zachary’s Snackery</p>
+    </footer>
+  </main>
+</body>
+</html>
