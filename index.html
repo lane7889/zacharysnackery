@@ -47,7 +47,7 @@
           📦 Place an Order
         </button>
       </h2>
-      <form class="order-form show" action="https://formsubmit.co/zacharyssnackery@gmail.com" method="POST">
+      <form action="https://snackery-backend-production.up.railway.app/order" method="POST">
         <input type="hidden" name="_next" value="thank-you.html">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_cc" value="3219001472@tmomail.net">
@@ -90,7 +90,9 @@
         </p>
 
         <button type="submit" class="order-btn">Submit Order Request</button>
-      </form>
+      
+  <input type="hidden" name="redirect" value="https://zacharysnackery.com/thank-you.html">
+</form>
     </section>
 
     <footer>
