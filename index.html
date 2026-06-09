@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Zachary's Snackery</title>
+  <link rel="icon" href="zsnackery-logo.png" type="image/png">
+  <link href="style.css" rel="stylesheet"/>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+<section class="hero-fullscreen">
+  <img alt="Zachary's Snackery Logo" class="fullscreen-logo" src="zsnackery-logo.png"/>
+  <a href="#form-section" class="order-btn">Order Now</a>
+  <div class="scroll-down">▼</div>
+</section>
+<main class="content">
+  <section class="intro">
+    <p>
+      I grew up allergic to the baked goods everyone else could eat — dairy, nuts, and sesame were always off the table.
+      That’s why I started Zachary’s Snackery: a brand that brings bold, nostalgic flavors to everyone in an allergy-friendly way.
+      Every baked good is made without dairy, nuts, or sesame — so no one has to miss out on the good stuff.
+    </p>
+  </section>
+  <section class="products">
+    <h2>Baked Goods</h2>
+    <div class="card">
+      <h3>Gingersnaps</h3>
+      <p>Classic spice with a crisp snap and warm molasses finish — perfect with a cup of tea or just on their own.</p>
+    </div>
+    <div class="card">
+      <h3>Chocolate Crinkle Cookies</h3>
+      <p>Rich, fudgy chocolate cookies rolled in powdered sugar — cracked on the outside, soft on the inside.</p>
+    </div>
+    <div class="card">
+      <h3>Snickerdoodles</h3>
+      <p>Soft, cinnamon-sweet, and kissed with gentle salt — a timeless favorite with an allergy-friendly twist. Also really good with coffee.</p>
+    </div>
+  </section>
+  <h2>How to Order</h2>
+  <p>Personal orders with local delivery now available. Farmers Market booth coming soon!</p>
+  <section class="order-expanded">
+    <h2>
+      <a href="#form-section" class="dropdown-toggle">📦 Place an Order</a>
+    </h2>
+  </section>
+
+  <div id="form-section">
+    <iframe frameborder="0" height="2170" marginheight="0" marginwidth="0"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSc99kqmjsNfMzCVRQDE_cm7lIpiOjMgutuYw3KTe0ppg3HJow/viewform?embedded=true"
+            width="100%">Loading…
+    </iframe>
+  </div>
+
+  <!-- ===================== REVIEWS (Realtime via Firebase) ===================== -->
+  <section class="reviews" id="reviews">
+    <h2>Customer Reviews</h2>
+
+    <!-- List renders live here -->
+    <div id="reviews-list" aria-live="polite"></div>
+
+    <!-- Google Review Button -->
+    <div class="google-review-wrapper">
+      <p class="review-text">Loved your cookies? Leave a Google review ⭐</p>
+      <a
+        href="https://g.page/r/Cf3f0hgtVHGwEBM/review"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="google-review-btn"
+      >
+        Leave a Google Review
+      </a>
+    </div>
+  </section>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+  // --- Firebase config ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyBcG04pspfGCJL_uFON8AZKeu-GtGjap9g",
+    authDomain: "zachary-s-snackery.firebaseapp.com",
+    projectId: "zachary-s-snackery",
+    storageBucket: "zachary-s-snackery.firebasestorage.app",
+    messagingSenderId: "240859823237",
+    appId: "1:240859823237:web:f1608d6ba3d9ef05bf7dec"
+  };
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+  import {
+    getFirestore, collection,
+    query, orderBy, limit, onSnapshot
+  } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const col = collection(db, "reviews");
+
+  // DOM elements
+  const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
+  const list = document.getElementById("reviews-list");
+
+  // --- Render reviews ---
+  function renderReview({ name, text, rating, createdAt }) {
+    const card = el("div", "review");
+    const head = el("div", "review-head");
+    const stars = el("span", "review-stars");
+    stars.textContent = "★".repeat(rating || 5);
+    const who = el("strong"); who.textContent = name || "Anonymous";
+    const when = el("span", "review-date");
+    if (createdAt?.toDate) {
+      const d = createdAt.toDate();
+      when.textContent = " · " + d.toLocaleDateString();
+    }
+    head.append(stars, who, when);
+    const body = el("p"); body.textContent = text;
+    card.append(head, body);
+    return card;
+  }
+
+  // --- Live listener ---
+  const q = query(col, orderBy("createdAt", "desc"), limit(50));
+  onSnapshot(q, (snap) => {
+    list.innerHTML = "";
+    snap.forEach(doc => list.appendChild(renderReview(doc.data())));
+  });
+
+</script>
+
+</main>
+<footer>
+  <p>📸 Follow us on Instagram: <a href="https://instagram.com/zacharyssnackery" target="_blank">@zacharyssnackery</a></p>
+  <p class="copyright">© 2025 Zachary’s Snackery</p>
+  <p class="cottage-note">
+    <small>Zachary’s Snackery operates under Florida’s Cottage Food Law. Products are made in a home kitchen not inspected by the Department of Agriculture.</small>
+  </p>
+</footer>
+</body>
+</html>
