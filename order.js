@@ -25,6 +25,7 @@ const state = {
   fulfillment: "local",
   localDozens: 1,
   shippingBoxes: 1,
+  shippingSpeed: "standard",
   localMix: 1,
   shipMix: 1,
   selectedFlavors: ["snickerdoodle"],
@@ -47,7 +48,7 @@ function totalCookies() {
 }
 
 function price() {
-  return state.fulfillment === "shipping" ? state.shippingBoxes * 25 : state.localDozens * 15;
+  return state.fulfillment === "shipping" ? (state.shippingBoxes * 25) + (state.shippingSpeed === "priority" ? 2 : 0) : state.localDozens * 15;
 }
 
 function allowedMixCount() {
@@ -247,7 +248,13 @@ function render() {
   $("shipping-boxes").textContent = state.shippingBoxes;
   $("cookie-count").textContent = total;
   $("order-price").textContent = `$${price().toFixed(2)}`;
-  $("summary-fulfillment").textContent = state.fulfillment === "shipping" ? "Shipping" : "Local delivery";
+  $("summary-fulfillment").textContent = state.fulfillment === "shipping"
+    ? (state.shippingSpeed === "priority" ? "Shipping · USPS Priority Mail (+$2)" : "Shipping · Standard")
+    : "Local delivery";
+
+  document.querySelectorAll("[data-shipping-speed]").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.shippingSpeed === state.shippingSpeed);
+  });
 
   document.querySelectorAll("[data-mix]").forEach(btn => {
     const n = Number(btn.dataset.mix);
@@ -285,6 +292,11 @@ document.querySelectorAll("[data-fulfillment]").forEach(btn => btn.addEventListe
 // Quantity controls
 $("local-minus").addEventListener("click", () => { if (state.localDozens > 1) state.localDozens--; setDefaultMix(); render(); });
 $("local-plus").addEventListener("click", () => { state.localDozens++; setDefaultMix(); render(); });
+document.querySelectorAll("[data-shipping-speed]").forEach(btn => btn.addEventListener("click", () => {
+  state.shippingSpeed = btn.dataset.shippingSpeed;
+  render();
+}));
+
 $("ship-minus").addEventListener("click", () => { if (state.shippingBoxes > 1) state.shippingBoxes--; setDefaultMix(); render(); });
 $("ship-plus").addEventListener("click", () => { state.shippingBoxes++; setDefaultMix(); render(); });
 
@@ -344,6 +356,7 @@ form.addEventListener("submit", async (e) => {
     cookieCount: totalCookies(),
     total: price(),
     fulfillment: state.fulfillment,
+    shippingService: state.fulfillment === "shipping" ? (state.shippingSpeed === "priority" ? "USPS Priority Mail (+$2)" : "Standard Shipping") : null,
     requestedDate: fd.get("requested_date"),
     notes: fd.get("notes").trim(),
     paymentStatus: "Awaiting confirmation",
@@ -370,6 +383,9 @@ form.addEventListener("submit", async (e) => {
     emailData.append("Total Cookies", String(totalCookies()));
     emailData.append("Total", `$${price().toFixed(2)}`);
     emailData.append("Fulfillment", state.fulfillment === "shipping" ? "Shipping" : "Local delivery");
+    if (state.fulfillment === "shipping") {
+      emailData.append("Shipping Service", state.shippingSpeed === "priority" ? "USPS Priority Mail (+$2)" : "Standard Shipping");
+    }
     emailData.append("Address", addressLine);
     emailData.append("Requested Date", fd.get("requested_date"));
     emailData.append("Notes", fd.get("notes").trim() || "None");
@@ -405,7 +421,7 @@ form.addEventListener("submit", async (e) => {
       console.warn("Order saved, but owner email alert could not be sent:", emailErr);
     }
 
-    sessionStorage.setItem("zs_last_order", JSON.stringify({ id, total: price(), items: plainItems, fulfillment: state.fulfillment }));
+    sessionStorage.setItem("zs_last_order", JSON.stringify({ id, total: price(), items: plainItems, fulfillment: state.fulfillment, shippingService: state.fulfillment === "shipping" ? (state.shippingSpeed === "priority" ? "USPS Priority Mail (+$2)" : "Standard Shipping") : null }));
     window.location.href = `thank-you.html?order=${encodeURIComponent(id)}`;
   } catch (err) {
     console.error(err);

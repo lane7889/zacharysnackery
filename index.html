@@ -56,7 +56,7 @@
             <strong>Local Delivery</strong><small>Within 25 miles of Orlando / Dr. Phillips 32836</small><b>From $15 / dozen</b>
           </button>
           <button type="button" class="fulfillment-card" data-fulfillment="shipping">
-            <strong>Shipping</strong><small>20-cookie minimum · typically 24–72 hrs after shipment</small><b>From $25 / 20 cookies</b>
+            <strong>Shipping</strong><small>20-cookie minimum · typically 36–72 hrs after shipment</small><b>From $25 / 20 cookies</b>
           </button>
         </div>
 
@@ -64,9 +64,38 @@
           <div><strong>How many dozens?</strong><small>Online minimum: 1 dozen (12 cookies)</small></div>
           <div class="counter"><button type="button" id="local-minus">−</button><span id="local-dozens">1</span><button type="button" id="local-plus">+</button></div>
         </div>
-        <div id="shipping-panel" class="quantity-panel" hidden>
-          <div><strong>How many shipping boxes?</strong><small>Each shipping box contains 20 cookies</small></div>
-          <div class="counter"><button type="button" id="ship-minus">−</button><span id="shipping-boxes">1</span><button type="button" id="ship-plus">+</button></div>
+        <div id="shipping-panel" class="shipping-panel-wrap" hidden>
+          <div class="quantity-panel">
+            <div><strong>How many shipping boxes?</strong><small>Each shipping box contains 20 cookies</small></div>
+            <div class="counter"><button type="button" id="ship-minus">−</button><span id="shipping-boxes">1</span><button type="button" id="ship-plus">+</button></div>
+          </div>
+
+          <div class="shipping-speed">
+            <div class="shipping-speed-heading"><strong>Shipping speed</strong><small>Choose your preferred USPS shipping option.</small></div>
+            <div class="shipping-speed-options">
+              <button type="button" class="shipping-speed-btn active" data-shipping-speed="standard">
+                <span><strong>Standard Shipping</strong><small>Included</small></span><b>$0</b>
+              </button>
+              <button type="button" class="shipping-speed-btn" data-shipping-speed="priority">
+                <span><strong>USPS Priority Mail ⚡</strong><small>Upgrade to faster shipping</small></span><b>+$2</b>
+              </button>
+            </div>
+          </div>
+
+          <div class="shipping-timeline" aria-label="Typical shipping timeline">
+            <div class="shipping-timeline-copy">
+              <strong>Fresh cookies, on the way 🍪</strong>
+              <small>Orders typically arrive within <b>36–72 hours after shipment.</b></small>
+            </div>
+            <div class="timeline-track">
+              <div class="timeline-step"><span>📦</span><strong>Shipped</strong><small>Mon–Wed</small></div>
+              <div class="timeline-line"></div>
+              <div class="timeline-step"><span>🚚</span><strong>In Transit</strong><small>Carrier tracking</small></div>
+              <div class="timeline-line"></div>
+              <div class="timeline-step"><span>🍪</span><strong>Estimated Arrival</strong><small>36–72 hrs</small></div>
+            </div>
+            <p>Tracking is provided once your order ships. Delivery times are estimates and may vary by carrier.</p>
+          </div>
         </div>
       </div>
 
