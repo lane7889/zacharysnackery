@@ -47,7 +47,7 @@ function totalCookies() {
 }
 
 function price() {
-  return state.fulfillment === "shipping" ? state.shippingBoxes * 25 : state.localDozens * 14;
+  return state.fulfillment === "shipping" ? state.shippingBoxes * 25 : state.localDozens * 15;
 }
 
 function allowedMixCount() {
@@ -96,9 +96,19 @@ function splitQuantities() {
     }
   } else {
     if (state.fulfillment === "shipping") {
-      // Each 20-cookie shipping box is 7 + 7 + 6. The customer chooses which flavor gets 6.
+      // Split the full shipping order as evenly as possible across three flavors.
+      // 20 -> 7/7/6, 40 -> 13/13/14, 60 -> 20/20/20, etc.
       if (!active.includes(state.shippingSixFlavor)) state.shippingSixFlavor = active[active.length - 1];
-      active.forEach(k => next[k] = (k === state.shippingSixFlavor ? 6 : 7) * state.shippingBoxes);
+      const base = Math.floor(total / 3);
+      const remainder = total % 3;
+      active.forEach(k => next[k] = base);
+      if (remainder === 1) {
+        // One extra cookie: the selected uneven flavor gets it.
+        next[state.shippingSixFlavor] += 1;
+      } else if (remainder === 2) {
+        // Two extra cookies: the other two flavors get one each, leaving the selected flavor one lower.
+        active.filter(k => k !== state.shippingSixFlavor).forEach(k => next[k] += 1);
+      }
     } else {
       if (total % 4 !== 0) return null;
       const units = total / 4;
@@ -171,13 +181,19 @@ function renderShippingThreeChoice() {
   wrap.hidden = !show;
   if (!show) { wrap.innerHTML = ""; return; }
   if (!state.selectedFlavors.includes(state.shippingSixFlavor)) state.shippingSixFlavor = state.selectedFlavors[2];
-  wrap.innerHTML = `<strong>Which flavor should have one less cookie?</strong><small>Each 20-cookie box is 7 + 7 + 6. Choose the flavor that gets 6.</small><div class="six-flavor-buttons"></div>`;
+  const total = totalCookies();
+  const base = Math.floor(total / 3);
+  const remainder = total % 3;
+  const unevenQty = remainder === 1 ? base + 1 : base;
+  const prompt = remainder === 1 ? "Which flavor should have the extra cookie?" : remainder === 2 ? "Which flavor should have one less cookie?" : "Your three flavors split evenly.";
+  const detail = remainder === 0 ? `${total} cookies split evenly: ${base} + ${base} + ${base}.` : `The full order is split as evenly as possible.`;
+  wrap.innerHTML = `<strong>${prompt}</strong><small>${detail}</small><div class="six-flavor-buttons"></div>`;
   const buttons = wrap.querySelector(".six-flavor-buttons");
   state.selectedFlavors.slice(0,3).forEach(key => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = `six-flavor-btn ${state.shippingSixFlavor === key ? "active" : ""}`;
-    btn.textContent = `${flavorNames[key]} — 6`;
+    btn.textContent = `${flavorNames[key]} — ${unevenQty}`;
     btn.addEventListener("click", () => { state.shippingSixFlavor = key; resetSplit(); render(); });
     buttons.appendChild(btn);
   });
@@ -227,7 +243,7 @@ function render() {
   } else if (allowedMixCount() === 2) {
     $("mix-help").textContent = "Choose any two flavors. Local orders are divided in 6-cookie increments.";
   } else if (state.fulfillment === "shipping") {
-    $("mix-help").textContent = "All three flavors split 7 + 7 + 6 per 20-cookie box. You choose which flavor gets 6.";
+    $("mix-help").textContent = "All three flavors are split as evenly as possible across the full shipping order.";
   } else {
     $("mix-help").textContent = "All three flavors are divided in 4-cookie increments.";
   }
